@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   navbarTitle = "AgenceImmo"
+  private disabled = false;
 
   constructor() { }
 
@@ -15,6 +16,11 @@ export class HeaderComponent implements OnInit {
   }
 
   isDisabled(): boolean {
-      return false;
+      return this.disabled;
+  }
+
+  onClick() {
+    console.log("on click");
+    this.disabled = !this.disabled;
   }
 }
