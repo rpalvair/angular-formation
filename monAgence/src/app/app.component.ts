@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Mon Agence';
+
+  private forSale = true;
+
+  getForSaleValue() {
+    return this.forSale ? "green" : "red";
+  }
+
+  isForSale(): boolean {
+    return this.forSale;
+  }
 }
