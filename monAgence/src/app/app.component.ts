@@ -10,8 +10,8 @@ export class AppComponent {
 
   private forSale = true;
 
-  getForSaleValue() {
-    return this.forSale ? "green" : "red";
+  getColorForSaleText = (val: any) : String => {
+    return val.forSell ? "green" : "red";
   }
 
   isForSale(): boolean {
