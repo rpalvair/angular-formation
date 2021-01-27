@@ -11,7 +11,7 @@ export class AppComponent {
   private forSale = true;
 
   getColorForSaleText = (val: any) : String => {
-    return val.forSell ? "green" : "red";
+    return val.forSale ? "green" : "red";
   }
 
   isForSale(): boolean {
@@ -23,17 +23,17 @@ export class AppComponent {
       {
         'title': 'Ma superbe maison',
         'category': 'Maison',
-        'forSell': false
+        'forSale': false
       },
       {
         'title': 'Petit appartement',
         'category': 'Appartement',
-        'forSell': true
+        'forSale': true
       },
       {
         'title': 'Belle villa',
         'category': 'Maison',
-        'forSell': false
+        'forSale': false
       }
     ];
   }

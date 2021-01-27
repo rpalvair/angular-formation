@@ -12,8 +12,8 @@
             bulk of the card's content.
           </p>
           <p [ngStyle]="{ color: getColorForSaleText(property) }">
-            <span *ngIf="property.forSell">A vendre</span>
-            <span *ngIf="!property.forSell">Vendu!</span>
+            <span *ngIf="property.forSale">A vendre</span>
+            <span *ngIf="!property.forSale">Vendu!</span>
           </p>
         </div>
       </div>
