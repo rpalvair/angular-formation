@@ -1,1 +1,20 @@
-<p>home works!</p>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let property of getProperties()">
+      <div class="card" style="width: 18rem">
+        <div class="card-body">
+          <h5 class="card-title">{{ property.title }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{ property.category }}</h6>
+          <p class="card-text">
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </p>
+          <p [ngStyle]="{ color: getColorForSaleText(property) }">
+            <span *ngIf="property.forSale">A vendre</span>
+            <span *ngIf="!property.forSale">Vendu!</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
