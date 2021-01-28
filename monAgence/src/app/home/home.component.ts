@@ -1,12 +1,13 @@
 import { PropertiesService } from './../services/properties.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(private propertiesService: PropertiesService) { }
 
@@ -14,8 +15,10 @@ export class HomeComponent implements OnInit {
 
   private properties: any[] = [];
 
+  private subscribtion: Subscription;
+
   ngOnInit(): void {
-    this.propertiesService.getProperties()
+    this.subscribtion = this.propertiesService.getProperties()
       .subscribe(
         (data) => {
           console.log("Data = ", data)
@@ -40,5 +43,10 @@ export class HomeComponent implements OnInit {
 
   getProperties(): any[] {
     return this.properties;
+  }
+
+  ngOnDestroy(): void {
+    this.subscribtion.unsubscribe();
+    console.log("unsubscribe")
   }
 }
