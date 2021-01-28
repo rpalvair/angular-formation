@@ -27,15 +27,15 @@ export class PropertiesService {
     }
   ];
 
-  getProperties(): Observable<any[]> {
+  getProperties(): Observable<any> {
     let i = 0;
     return new Observable((observer) => {
       if (this.properties && this.properties.length > 0) {
         let interval = setInterval(() => {
-          observer.next(this.properties)
+          observer.next(this.properties[i])
           i++
         }, 3000)
-        if (i === 3) {
+        if (i === this.properties.length) {
           observer.complete
           clearInterval(interval)
         }

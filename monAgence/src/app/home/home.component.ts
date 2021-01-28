@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
       .subscribe(
         (data) => {
           console.log("Data = ", data)
-          this.properties = data;
+          this.properties.push(data);
         },
         (error) => {
           console.error("Error =", error)
