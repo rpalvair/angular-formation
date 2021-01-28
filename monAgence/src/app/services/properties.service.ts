@@ -28,17 +28,20 @@ export class PropertiesService {
   ];
 
   getProperties(): Observable<any> {
-    let i = 0;
     return new Observable((observer) => {
       if (this.properties && this.properties.length > 0) {
+        let i = 0;
         let interval = setInterval(() => {
           observer.next(this.properties[i])
           i++
-        }, 3000)
-        if (i === this.properties.length) {
-          observer.complete
-          clearInterval(interval)
-        }
+          console.debug("i =", i)
+          console.debug("this.properties.length =", this.properties.length)
+          if (i === this.properties.length) {
+            console.debug("complete")
+            clearInterval(interval)
+            observer.complete()
+          }
+        }, 1000)
       } else {
         const error = new Error("Properties do not exist or are empty");
         observer.error(error)
