@@ -22,15 +22,10 @@ export class HomeComponent implements OnInit, OnDestroy {
       .subscribe(
         (data) => {
           console.log("Data = ", data)
-          this.properties.push(data);
-        },
-        (error) => {
-          console.error("Error =", error)
-        },
-        () => {
-          console.log("complete")
+          this.properties.push(data)
         }
       )
+    this.propertiesService.emitProperty()
   }
 
   getColorForSaleText = (val: any): String => {
