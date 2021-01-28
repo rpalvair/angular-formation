@@ -16,16 +16,18 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.propertiesService.getProperties()
-    .then(
-      (data) => {
-        console.log("Data = ",data)
-        this.properties = data
-      }
-    ).catch(
-      (error) => {
-        console.error("Error =",error)
-      }
-    )
+      .subscribe(
+        (data) => {
+          console.log("Data = ", data)
+          this.properties = data;
+        },
+        (error) => {
+          console.error("Error =", error)
+        },
+        () => {
+          console.log("complete")
+        }
+      )
   }
 
   getColorForSaleText = (val: any): String => {
