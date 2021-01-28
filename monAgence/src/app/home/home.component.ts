@@ -1,3 +1,4 @@
+import { PropertiesService } from './../services/properties.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,11 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private propertiesService: PropertiesService) { }
 
   private forSale = true;
 
+  private properties: any[] = [];
+
   ngOnInit(): void {
+    this.propertiesService.getProperties()
+    .then(
+      (data) => {
+        console.log("Data = ",data)
+        this.properties = data
+      }
+    ).catch(
+      (error) => {
+        console.error("Error =",error)
+      }
+    )
   }
 
   getColorForSaleText = (val: any): String => {
@@ -23,22 +37,6 @@ export class HomeComponent implements OnInit {
   }
 
   getProperties(): any[] {
-    return [
-      {
-        'title': 'Ma superbe maison',
-        'category': 'Maison',
-        'forSale': false
-      },
-      {
-        'title': 'Petit appartement',
-        'category': 'Appartement',
-        'forSale': true
-      },
-      {
-        'title': 'Belle villa',
-        'category': 'Maison',
-        'forSale': false
-      }
-    ];
+    return this.properties;
   }
 }
