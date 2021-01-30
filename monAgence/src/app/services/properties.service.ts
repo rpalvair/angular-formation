@@ -15,7 +15,8 @@ export class PropertiesService {
       'title': 'Ma superbe maison',
       'category': 'Maison',
       'surface' : '100',
-      'forSale': false
+      'forSale': false,
+      'price' : 400000
     },
     {
       'title': 'Petit appartement',
