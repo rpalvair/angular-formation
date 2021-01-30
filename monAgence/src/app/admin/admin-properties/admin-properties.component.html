@@ -17,7 +17,7 @@
 <div class="modal fade" id="propertiesFormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <form #propertiesForm="ngForm" (ngSubmit)="onSubmit(propertiesForm)">
+      <form [formGroup]="propertiesForm" (ngSubmit)="onSubmit()">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Edition d'un bien</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -26,30 +26,30 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="titre" name="title" ngModel required/>
+            <input type="text" class="form-control" placeholder="titre" formControlName="title"/>
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <label class="input-group-text" for="inputGroupSelect01">Catégorie</label>
             </div>
-            <select class="custom-select" id="inputGroupSelect01" name="category" ngModel>
+            <select class="custom-select" id="inputGroupSelect01" formControlName="category">
               <option value="appartement">Appartement</option>
               <option value="maison">Maison</option>
             </select>
           </div>
           <div class="form-row">
             <div class="form-group col-6">
-              <input type="text" class="form-control" placeholder="Surface (m²)" name="surface" ngModel/>
+              <input type="text" class="form-control" placeholder="Surface (m²)" formControlName="surface"/>
             </div>
             <div class="form-group col-6">
-              <input type="text" class="form-control" placeholder="Nombre de pièces" name="rooms" ngModel/>
+              <input type="text" class="form-control" placeholder="Nombre de pièces" formControlName="rooms"/>
             </div>
           </div>
           <div class="form-group">
             <textarea class="form-control w-100" rows="4"></textarea>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Prix" name="price" ngModel/>
+            <input type="text" class="form-control" placeholder="Prix" formControlName="price"/>
           </div>
         </div>
         <div class="modal-footer">
