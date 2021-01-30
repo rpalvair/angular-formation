@@ -26,7 +26,7 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="titre" name="title" ngModel/>
+            <input type="text" class="form-control" placeholder="titre" name="title" ngModel required/>
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -56,7 +56,7 @@
           <button type="button" class="btn btn-secondary" data-dismiss="modal">
             Annuler
           </button>
-          <button type="submit" class="btn btn-primary">Enregistrer</button>
+          <button type="submit" class="btn btn-primary" [disabled]="propertiesForm.invalid">Enregistrer</button>
         </div>
       </form>
     </div>
