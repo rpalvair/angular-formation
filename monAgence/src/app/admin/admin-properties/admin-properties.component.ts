@@ -2,6 +2,7 @@ import { PropertiesService } from './../../services/properties.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+declare var $: any;
 
 @Component({
   selector: 'app-admin-properties',
@@ -47,5 +48,10 @@ export class AdminPropertiesComponent implements OnInit {
     const property = this.propertiesForm.value
     this.propertiesService.createProperty(property)
     console.log("properties", this.properties)
+    $('#propertiesFormModal').modal('hide')
+  }
+
+  resetForm() {
+    this.propertiesForm.reset()
   }
 }

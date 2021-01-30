@@ -14,11 +14,14 @@ export class PropertiesService {
     {
       'title': 'Ma superbe maison',
       'category': 'Maison',
-      'forSale': false
+      'surface' : '100',
+      'forSale': false,
+      'price' : 400000
     },
     {
       'title': 'Petit appartement',
       'category': 'Appartement',
+      'rooms' : 4,
       'forSale': true
     },
     {
