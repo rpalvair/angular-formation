@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-properties',
@@ -12,4 +13,9 @@ export class AdminPropertiesComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onSubmit(form: NgForm) {
+    console.log(form)
+    const title = form.value['title']
+    console.log("title", title)
+  }
 }
