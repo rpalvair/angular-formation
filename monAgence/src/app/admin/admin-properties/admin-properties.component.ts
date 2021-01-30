@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-properties',
@@ -8,14 +8,30 @@ import { NgForm } from '@angular/forms';
 })
 export class AdminPropertiesComponent implements OnInit {
 
-  constructor() { }
+  propertiesForm: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.initPropertiesForm()
   }
 
-  onSubmit(form: NgForm) {
-    console.log(form)
-    const title = form.value['title']
+  onSubmit() {
+    console.log(this.propertiesForm.value)
+    const title = this.propertiesForm.value['title']
     console.log("title", title)
+  }
+
+  initPropertiesForm() {
+    this.propertiesForm = this.formBuilder.group(
+      {
+        title: '',
+        category: '',
+        surface: '',
+        rooms: '',
+        description: '',
+        price: ''
+      }
+    )
   }
 }
