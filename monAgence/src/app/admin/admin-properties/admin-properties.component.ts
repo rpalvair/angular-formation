@@ -54,4 +54,9 @@ export class AdminPropertiesComponent implements OnInit {
   resetForm() {
     this.propertiesForm.reset()
   }
+
+  onDeleteProperty(property: any) {
+    console.log("Delete property",property)
+    this.propertiesService.deleteProperty(property)
+  }
 }

@@ -6,7 +6,6 @@ import { Observable, Subject } from 'rxjs';
 })
 export class PropertiesService {
 
-
   constructor() { }
 
 
@@ -14,14 +13,14 @@ export class PropertiesService {
     {
       'title': 'Ma superbe maison',
       'category': 'Maison',
-      'surface' : '100',
+      'surface': '100',
       'forSale': false,
-      'price' : 400000
+      'price': 400000
     },
     {
       'title': 'Petit appartement',
       'category': 'Appartement',
-      'rooms' : 4,
+      'rooms': 4,
       'forSale': true
     },
     {
@@ -42,6 +41,16 @@ export class PropertiesService {
     this.properties.push(property)
     console.log("properties", this.properties)
   }
+
+  deleteProperty(property: any) {
+    console.log("Delete property", property)
+    const index = this.properties.indexOf(property);
+    if (index > -1) {
+      this.properties.splice(index, 1);
+    }
+    console.log("properties", this.properties)
+  }
+
 
   getProperties() {
     return this.subject
