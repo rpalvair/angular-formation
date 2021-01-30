@@ -68,7 +68,7 @@ export class AdminPropertiesComponent implements OnInit {
     this.toDelete = null
   }
 
-  cancelDelete() {
+  onCancelDelete() {
     this.toDelete = null
   }
 }
