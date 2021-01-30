@@ -6,6 +6,7 @@ import { Observable, Subject } from 'rxjs';
 })
 export class PropertiesService {
 
+
   constructor() { }
 
 
@@ -45,7 +46,14 @@ export class PropertiesService {
 
   }
 
+  createProperty(property: any) {
+    console.log("adding property", property)
+    this.properties.push(property)
+    console.log("properties", this.properties)
+  }
+
   getProperties() {
     return this.subject
   }
+
 }

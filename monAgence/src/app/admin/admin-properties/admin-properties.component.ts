@@ -1,3 +1,4 @@
+import { PropertiesService } from './../../services/properties.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 
@@ -10,16 +11,10 @@ export class AdminPropertiesComponent implements OnInit {
 
   propertiesForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private propertiesService: PropertiesService) { }
 
   ngOnInit(): void {
     this.initPropertiesForm()
-  }
-
-  onSubmit() {
-    console.log(this.propertiesForm.value)
-    const title = this.propertiesForm.value['title']
-    console.log("title", title)
   }
 
   initPropertiesForm() {
@@ -33,5 +28,13 @@ export class AdminPropertiesComponent implements OnInit {
         price: ['', Validators.required]
       }
     )
+  }
+
+  onSubmit() {
+    console.log(this.propertiesForm.value)
+    const title = this.propertiesForm.value['title']
+    console.log("title", title)
+    const property = this.propertiesForm.value
+    this.propertiesService.createProperty(property)
   }
 }
