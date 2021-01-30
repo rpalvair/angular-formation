@@ -6,6 +6,7 @@ import { Observable, Subject } from 'rxjs';
 })
 export class PropertiesService {
 
+
   constructor() { }
 
 
@@ -30,22 +31,17 @@ export class PropertiesService {
   private subject: Subject<any> = new Subject();
 
   emitProperty() {
-    let i = 0;
-    let interval = setInterval(() => {
-      this.subject.next(this.properties[i])
-      i++
-      console.debug("i =", i)
-      console.debug("this.properties.length =", this.properties.length)
-      if (i === this.properties.length) {
-        console.debug("complete")
-        clearInterval(interval)
-        this.subject.complete()
-      }
-    }, 1000)
+    this.subject.next(this.properties)
+  }
 
+  createProperty(property: any) {
+    console.log("adding property", property)
+    this.properties.push(property)
+    console.log("properties", this.properties)
   }
 
   getProperties() {
     return this.subject
   }
+
 }
