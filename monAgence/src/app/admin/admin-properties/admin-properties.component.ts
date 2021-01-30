@@ -1,6 +1,7 @@
 import { PropertiesService } from './../../services/properties.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-admin-properties',
@@ -10,11 +11,20 @@ import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 export class AdminPropertiesComponent implements OnInit {
 
   propertiesForm: FormGroup;
+  propertiesSubscription: Subscription;
+  properties: any[] = [];
 
   constructor(private formBuilder: FormBuilder, private propertiesService: PropertiesService) { }
 
   ngOnInit(): void {
     this.initPropertiesForm()
+    this.propertiesService.getProperties().subscribe(
+      (data) => {
+        console.log("data", data)
+        this.properties = data
+      }
+    )
+    this.propertiesService.emitProperty()
   }
 
   initPropertiesForm() {
@@ -36,5 +46,6 @@ export class AdminPropertiesComponent implements OnInit {
     console.log("title", title)
     const property = this.propertiesForm.value
     this.propertiesService.createProperty(property)
+    console.log("properties", this.properties)
   }
 }

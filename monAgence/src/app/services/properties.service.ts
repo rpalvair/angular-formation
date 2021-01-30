@@ -31,19 +31,7 @@ export class PropertiesService {
   private subject: Subject<any> = new Subject();
 
   emitProperty() {
-    let i = 0;
-    let interval = setInterval(() => {
-      this.subject.next(this.properties[i])
-      i++
-      console.debug("i =", i)
-      console.debug("this.properties.length =", this.properties.length)
-      if (i === this.properties.length) {
-        console.debug("complete")
-        clearInterval(interval)
-        this.subject.complete()
-      }
-    }, 1000)
-
+    this.subject.next(this.properties)
   }
 
   createProperty(property: any) {

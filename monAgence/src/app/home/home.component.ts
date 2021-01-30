@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       .subscribe(
         (data) => {
           console.log("Data = ", data)
-          this.properties.push(data)
+          this.properties =  data
         }
       )
     this.propertiesService.emitProperty()
