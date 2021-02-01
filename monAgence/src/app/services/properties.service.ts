@@ -1,3 +1,4 @@
+import { Property } from '../interfaces/property';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
@@ -9,24 +10,31 @@ export class PropertiesService {
   constructor() { }
 
 
-  private properties = [
+  private properties: Property[] = [
     {
       'title': 'Ma superbe maison',
       'category': 'Maison',
-      'surface': '100',
+      'surface': 100,
       'forSale': false,
-      'price': 400000
+      'price': 400000,
+      'rooms': 4
     },
     {
       'title': 'Petit appartement',
       'category': 'Appartement',
       'rooms': 4,
-      'forSale': true
+      'forSale': true,
+      'surface': 100,
+      'price': 280000
+
     },
     {
       'title': 'Belle villa',
       'category': 'Maison',
-      'forSale': false
+      'forSale': false,
+      'surface': 100,
+      'price': 30000,
+      'rooms': 5
     }
   ];
 
@@ -36,13 +44,13 @@ export class PropertiesService {
     this.subject.next(this.properties)
   }
 
-  createProperty(property: any) {
+  createProperty(property: Property) {
     console.log("adding property", property)
     this.properties.push(property)
     console.log("properties", this.properties)
   }
 
-  deleteProperty(property: any) {
+  deleteProperty(property: Property) {
     console.log("Delete property", property)
     const index = this.properties.indexOf(property);
     if (index > -1) {
@@ -51,7 +59,7 @@ export class PropertiesService {
     console.log("properties", this.properties)
   }
 
-  updateProperty(property: any, index: number) {
+  updateProperty(property: Property, index: number) {
     console.log(`Update property ${JSON.stringify(property)} at index ${index}`)
     if (index > -1) {
       this.properties.splice(index, 1, property);
