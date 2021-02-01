@@ -25,6 +25,10 @@
       <p *ngIf="property.price && property.price !== ''">
         {{ property.price }} €
       </p>
+      <p>
+        <span class="text-danger" *ngIf="property.forSale">A vendre</span>
+        <span class="text-success" *ngIf="!property.forSale">Vendu!</span>
+      </p>
     </div>
   </div>
 </div>
@@ -67,6 +71,13 @@
           <div class="form-group">
             <input type="text" class="form-control" placeholder="Prix" formControlName="price"/>
           </div>
+        </div>
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="customSwitch1" formControlName="forSale">
+          <label class="custom-control-label" for="customSwitch1">
+            <span class="text-success" *ngIf="!propertiesForm.value.forSale">Vendu</span>
+            <span class="text-danger" *ngIf="propertiesForm.value.forSale">A Vendre</span>
+          </label>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">
