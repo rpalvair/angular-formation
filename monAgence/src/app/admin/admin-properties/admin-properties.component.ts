@@ -1,3 +1,4 @@
+import { Property } from '../../interfaces/property';
 import { PropertiesService } from './../../services/properties.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
@@ -13,8 +14,8 @@ export class AdminPropertiesComponent implements OnInit {
 
   propertiesForm: FormGroup;
   propertiesSubscription: Subscription;
-  properties: any[] = [];
-  toDelete: any;
+  properties: Property[] = [];
+  toDelete: Property;
   private editMode: boolean = false;
   private indexToUpdate: number = null;
 
@@ -49,7 +50,7 @@ export class AdminPropertiesComponent implements OnInit {
     console.log(this.propertiesForm.value)
     const title = this.propertiesForm.value['title']
     console.log("title", title)
-    const property = this.propertiesForm.value
+    const property: Property = this.propertiesForm.value
     if (this.editMode) {
       console.log("Edit mode for property", property)
       this.propertiesService.updateProperty(property, this.indexToUpdate)
