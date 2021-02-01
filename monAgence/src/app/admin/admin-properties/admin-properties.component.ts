@@ -39,7 +39,8 @@ export class AdminPropertiesComponent implements OnInit {
         surface: ['', Validators.required],
         rooms: ['', Validators.required],
         description: '',
-        price: ['', Validators.required]
+        price: ['', Validators.required],
+        forSale: ''
       }
     )
   }
@@ -93,5 +94,6 @@ export class AdminPropertiesComponent implements OnInit {
     this.propertiesForm.get('rooms').setValue(property.rooms)
     this.propertiesForm.get('description').setValue(property.description)
     this.propertiesForm.get('price').setValue(property.price)
+    this.propertiesForm.get('forSale').setValue(property.forSale)
   }
 }
