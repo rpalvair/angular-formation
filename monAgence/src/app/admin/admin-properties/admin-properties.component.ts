@@ -14,7 +14,7 @@ export class AdminPropertiesComponent implements OnInit {
   propertiesForm: FormGroup;
   propertiesSubscription: Subscription;
   properties: any[] = [];
-  toDelete : any;
+  toDelete: any;
 
   constructor(private formBuilder: FormBuilder, private propertiesService: PropertiesService) { }
 
@@ -57,7 +57,7 @@ export class AdminPropertiesComponent implements OnInit {
   }
 
   onDeleteProperty(property: any) {
-    console.log("Delete property",property)
+    console.log("Delete property", property)
     this.toDelete = property;
     $('#deletePropertyModal').modal('show')
   }
@@ -70,5 +70,15 @@ export class AdminPropertiesComponent implements OnInit {
 
   onCancelDelete() {
     this.toDelete = null
+  }
+
+  onEditProperty(property: any) {
+    $('#propertiesFormModal').modal('show')
+    this.propertiesForm.get('title').setValue(property.title)
+    this.propertiesForm.get('category').setValue(property.category)
+    this.propertiesForm.get('surface').setValue(property.surface)
+    this.propertiesForm.get('rooms').setValue(property.rooms)
+    this.propertiesForm.get('description').setValue(property.description)
+    this.propertiesForm.get('price').setValue(property.price)
   }
 }
