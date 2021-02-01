@@ -51,6 +51,13 @@ export class PropertiesService {
     console.log("properties", this.properties)
   }
 
+  updateProperty(property: any, index: number) {
+    console.log(`Update property ${JSON.stringify(property)} at index ${index}`)
+    if (index > -1) {
+      this.properties.splice(index, 1, property);
+    }
+    console.log("properties", this.properties)
+  }
 
   getProperties() {
     return this.subject
