@@ -15,6 +15,8 @@ export class AdminPropertiesComponent implements OnInit {
   propertiesSubscription: Subscription;
   properties: any[] = [];
   toDelete: any;
+  private editMode: boolean = false;
+  private indexToUpdate: number = null;
 
   constructor(private formBuilder: FormBuilder, private propertiesService: PropertiesService) { }
 
@@ -47,13 +49,22 @@ export class AdminPropertiesComponent implements OnInit {
     const title = this.propertiesForm.value['title']
     console.log("title", title)
     const property = this.propertiesForm.value
-    this.propertiesService.createProperty(property)
+    if (this.editMode) {
+      console.log("Edit mode for property", property)
+      this.propertiesService.updateProperty(property, this.indexToUpdate)
+    } else {
+      this.propertiesService.createProperty(property)
+    }
     console.log("properties", this.properties)
+    this.editMode = false
+    this.indexToUpdate = null
     $('#propertiesFormModal').modal('hide')
   }
 
   resetForm() {
     this.propertiesForm.reset()
+    this.editMode = false
+    this.indexToUpdate = null
   }
 
   onDeleteProperty(property: any) {
@@ -73,6 +84,8 @@ export class AdminPropertiesComponent implements OnInit {
   }
 
   onEditProperty(property: any) {
+    this.editMode = true;
+    this.indexToUpdate = this.properties.indexOf(property);
     $('#propertiesFormModal').modal('show')
     this.propertiesForm.get('title').setValue(property.title)
     this.propertiesForm.get('category').setValue(property.category)
