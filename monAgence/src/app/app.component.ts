@@ -12,7 +12,7 @@ export class AppComponent {
 
   constructor() {
     const firebaseConfig = {
-      apiKey: "AIzaSyBcdOejAx73vPQxgFVe5rUZric9wklEsP8",
+      apiKey: "",
       authDomain: "monagence-15ac2.firebaseapp.com",
       projectId: "monagence-15ac2",
       storageBucket: "monagence-15ac2.appspot.com",
