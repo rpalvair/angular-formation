@@ -18,6 +18,8 @@ export class AdminPropertiesComponent implements OnInit {
   toDelete: Property;
   private editMode: boolean = false;
   private indexToUpdate: number = null;
+  photoLoading: boolean = false;
+  private photoUrl: any;
 
   constructor(private formBuilder: FormBuilder, private propertiesService: PropertiesService) { }
 
@@ -51,6 +53,7 @@ export class AdminPropertiesComponent implements OnInit {
     const title = this.propertiesForm.value['title']
     console.log("title", title)
     const property: Property = this.propertiesForm.value
+    property.photo = this.photoUrl ? this.photoUrl : null
     if (this.editMode) {
       console.log("Edit mode for property", property)
       this.propertiesService.updateProperty(property, this.indexToUpdate)
@@ -96,5 +99,17 @@ export class AdminPropertiesComponent implements OnInit {
     this.propertiesForm.get('description').setValue(property.description)
     this.propertiesForm.get('price').setValue(property.price)
     this.propertiesForm.get('forSale').setValue(property.forSale)
+  }
+
+  onUpLoadFile(event) {
+    console.log("event", event)
+    this.photoLoading = true
+    this.propertiesService.uploadFile(event.target.files[0]).then(
+      (url: string) => {
+        console.log("url", url)
+        this.photoUrl = url
+        this.photoLoading = false
+      }
+    )
   }
 }
