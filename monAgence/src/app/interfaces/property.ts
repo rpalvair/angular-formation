@@ -3,7 +3,7 @@ export interface Property {
   category: string;
   surface: number;
   rooms: number;
-  description?: string;
+  description: string;
   price: number;
   forSale: boolean
 }
