@@ -5,5 +5,6 @@ export interface Property {
   rooms: number;
   description: string;
   price: number;
-  forSale: boolean
+  forSale: boolean;
+  photo?: string;
 }

@@ -87,7 +87,7 @@ export class PropertiesService {
     firebase.database().ref("/properties").set(this.properties)
   }
 
-  private uploadFile(file: File): Promise<any> {
+  uploadFile(file: File): Promise<any> {
     return new Promise<any>(
       (resolve, reject) => {
         const uniqueId = Date.now().toString() + file.name
