@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
@@ -11,7 +12,9 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private authenticationService: AuthenticationService) { }
+  constructor(private formBuilder: FormBuilder,
+    private authenticationService: AuthenticationService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.initLoginForm()
@@ -34,6 +37,7 @@ export class LoginComponent implements OnInit {
       (data) => {
         console.log("data user", data)
         console.log("email connected user", data.user.email)
+        this.router.navigateByUrl("admin/dashboard")
       }
     ).catch(
       (error) => {
