@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import firebase from 'firebase/app';
 import 'firebase/database';
+import 'firebase/storage';
 import { Subject } from 'rxjs';
 import { Property } from '../interfaces/property';
 
@@ -54,7 +55,7 @@ export class PropertiesService {
   }
 
   createProperty(property: Property) {
-    if(!property.description) {
+    if (!property.description) {
       property.description = ""
     }
     console.log("adding property", property)
@@ -84,6 +85,30 @@ export class PropertiesService {
 
   private saveProperties() {
     firebase.database().ref("/properties").set(this.properties)
+  }
+
+  private uploadFile(file: File): Promise<any> {
+    return new Promise<any>(
+      (resolve, reject) => {
+        const uniqueId = Date.now().toString() + file.name
+        const upload: firebase.storage.UploadTask = firebase.storage().ref().child("images/properties" + uniqueId).put(file)
+        upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
+          (snapshot) => {
+            console.log("Loading...")
+          },
+          (error) => {
+            console.error(error)
+            reject(error)
+          },
+          () => {
+            console.log("Completed")
+            upload.snapshot.ref.getDownloadURL().then((downloadURL) => {
+              console.log('File available at', downloadURL);
+              resolve(downloadURL)
+            });
+          })
+      }
+    )
   }
 
   getProperties() {
