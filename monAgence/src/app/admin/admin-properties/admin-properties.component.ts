@@ -1,8 +1,9 @@
+
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { Property } from '../../interfaces/property';
 import { PropertiesService } from './../../services/properties.service';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
 declare var $: any;
 
 @Component({
@@ -80,6 +81,7 @@ export class AdminPropertiesComponent implements OnInit {
   }
 
   onConfirmDelete() {
+    this.propertiesService.removeFile(this.toDelete.photo)
     this.propertiesService.deleteProperty(this.toDelete)
     $('#deletePropertyModal').modal('hide')
     this.toDelete = null
@@ -108,6 +110,9 @@ export class AdminPropertiesComponent implements OnInit {
     this.photoLoading = true
     this.propertiesService.uploadFile(event.target.files[0]).then(
       (url: string) => {
+        if (this.photoUrl && this.photoUrl != null) {
+          this.propertiesService.removeFile(this.photoUrl)
+        }
         console.log("url", url)
         this.photoUrl = url
         this.photoLoading = false

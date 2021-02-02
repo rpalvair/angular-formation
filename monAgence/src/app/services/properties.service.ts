@@ -111,6 +111,17 @@ export class PropertiesService {
     )
   }
 
+  removeFile(url: string) {
+    if (url) {
+      const reference: firebase.storage.Reference = firebase.storage().refFromURL(url)
+      reference.delete().then(
+        () => console.log("file" + url + "deleted")
+      ).catch(
+        (error) => console.error(error)
+      )
+    }
+  }
+
   getProperties() {
     return this.subject
   }
