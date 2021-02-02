@@ -45,4 +45,14 @@ export class AuthenticationService {
       }
     )
   }
+
+  logOut() {
+    firebase.auth().signOut().then(
+      () => console.log("user disconnected")
+    ).catch(
+      (error) => {
+        console.error(error)
+      }
+    )
+  }
 }
