@@ -12,23 +12,30 @@
   <hr class="mt-1 mb-5 bg-dark" />
   <div class="row">
     <div *ngFor="let property of properties"  class="col-12 shadow-sm p-4 mb-3 bg-light">
-      <div class="d-flex">
-        <h3 class="font-weight-normal">{{ property.title }}</h3>
-        <div class="ml-auto">
-          <button class="btn btn-primary m-1" type="button" (click)="onEditProperty(property)"><i class="fas fa-edit"></i></button>
-          <button class="btn btn-danger m-1" type="button" (click)="onDeleteProperty(property)"><i class="fas fa-trash-alt"></i></button>
+      <div class="row">
+        <div class="col-3">
+          <img *ngIf="property.photo && property.photo != null" [src]="property.photo" alt="" class="w-100">
+        </div>
+        <div class="col-9">
+          <div class="d-flex">
+            <h3 class="font-weight-normal">{{ property.title }}</h3>
+            <div class="ml-auto">
+              <button class="btn btn-primary m-1" type="button" (click)="onEditProperty(property)"><i class="fas fa-edit"></i></button>
+              <button class="btn btn-danger m-1" type="button" (click)="onDeleteProperty(property)"><i class="fas fa-trash-alt"></i></button>
+            </div>
+          </div>
+          <p>
+              {{ property.category }}<span *ngIf="property.surface"> de {{ property.surface }} m²</span><span *ngIf="property.rooms">, {{ property.rooms }} pièce(s)</span>
+          </p>
+          <p *ngIf="property.price && property.price !== 0">
+            {{ property.price }} €
+          </p>
+          <p>
+            <span class="text-danger" *ngIf="property.forSale">A vendre</span>
+            <span class="text-success" *ngIf="!property.forSale">Vendu!</span>
+          </p>
         </div>
       </div>
-      <p>
-          {{ property.category }}<span *ngIf="property.surface"> de {{ property.surface }} m²</span><span *ngIf="property.rooms">, {{ property.rooms }} pièce(s)</span>
-      </p>
-      <p *ngIf="property.price && property.price !== 0">
-        {{ property.price }} €
-      </p>
-      <p>
-        <span class="text-danger" *ngIf="property.forSale">A vendre</span>
-        <span class="text-success" *ngIf="!property.forSale">Vendu!</span>
-      </p>
     </div>
   </div>
 </div>
@@ -72,7 +79,10 @@
             <input type="text" class="form-control" placeholder="Prix" formControlName="price"/>
           </div>
         </div>
-        <div class="form-raw">
+        <div *ngIf="photoUrl && photoUrl != null" class="d-flex mb-3">
+          <img [src]="photoUrl" alt="" class="w-50 mx-auto">
+        </div>
+        <div class="form-row">
           <div class="col-9">
             <div class="input-group mb-3">
               <div class="custom-file">

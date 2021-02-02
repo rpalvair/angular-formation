@@ -19,7 +19,7 @@ export class AdminPropertiesComponent implements OnInit {
   private editMode: boolean = false;
   private indexToUpdate: number = null;
   photoLoading: boolean = false;
-  private photoUrl: any;
+  photoUrl: any;
 
   constructor(private formBuilder: FormBuilder, private propertiesService: PropertiesService) { }
 
@@ -70,6 +70,7 @@ export class AdminPropertiesComponent implements OnInit {
     this.propertiesForm.reset()
     this.editMode = false
     this.indexToUpdate = null
+    this.photoUrl = null
   }
 
   onDeleteProperty(property: any) {
@@ -88,9 +89,10 @@ export class AdminPropertiesComponent implements OnInit {
     this.toDelete = null
   }
 
-  onEditProperty(property: any) {
+  onEditProperty(property: Property) {
     this.editMode = true;
     this.indexToUpdate = this.properties.indexOf(property);
+    this.photoUrl = property.photo
     $('#propertiesFormModal').modal('show')
     this.propertiesForm.get('title').setValue(property.title)
     this.propertiesForm.get('category').setValue(property.category)
