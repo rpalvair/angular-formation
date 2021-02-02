@@ -29,13 +29,13 @@ export class AuthenticationService {
   }
 
 
-  login(email: string, password: string) {
-    return new Promise<void>(
+  login(email: string, password: string): Promise<any> {
+    return new Promise<any>(
       (resolve, reject) => {
         firebase.auth().signInWithEmailAndPassword(email, password).then(
-          () => {
-            console.log("connecté")
-            resolve()
+          (data) => {
+            console.log("connected")
+            resolve(data)
           }
         ).catch(
           (error) => {

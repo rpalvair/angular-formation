@@ -26,14 +26,20 @@ export class LoginComponent implements OnInit {
     )
   }
 
-  async onSubmit() {
+  onSubmit() {
     console.log("form", this.loginForm.value)
-    const email = this.loginForm.get('email').value;
-    const password = this.loginForm.get('password').value;
-    try {
-      await this.authenticationService.login(email, password)
-    } catch (e) {
-      console.log("error", e)
-    }
+    const email = this.loginForm.get('email').value
+    const password = this.loginForm.get('password').value
+    this.authenticationService.login(email, password).then(
+      (data) => {
+        console.log("data user", data)
+        console.log("email connected user", data.user.email)
+      }
+    ).catch(
+      (error) => {
+        console.log("error", error)
+      }
+    )
+
   }
 }
