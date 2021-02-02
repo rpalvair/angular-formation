@@ -9,6 +9,7 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { AdminPropertiesComponent } from './admin/admin-properties/admin-properties.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SigninComponent } from './authentication/signin/signin.component';
+import { LoginComponent } from './authentication/login/login.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { SigninComponent } from './authentication/signin/signin.component';
     HomeComponent,
     AdminDashboardComponent,
     AdminPropertiesComponent,
-    SigninComponent
+    SigninComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

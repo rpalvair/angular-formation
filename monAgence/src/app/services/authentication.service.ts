@@ -16,8 +16,26 @@ export class AuthenticationService {
       (resolve, reject) => {
         firebase.auth().createUserWithEmailAndPassword(email, password).then(
           () => {
-            console.log("connecté")
+            console.log("utilisateur créé")
             resolve()
+          }
+        ).catch(
+          (error) => {
+            reject(error)
+          }
+        )
+      }
+    )
+  }
+
+
+  login(email: string, password: string): Promise<any> {
+    return new Promise<any>(
+      (resolve, reject) => {
+        firebase.auth().signInWithEmailAndPassword(email, password).then(
+          (data) => {
+            console.log("connected")
+            resolve(data)
           }
         ).catch(
           (error) => {
