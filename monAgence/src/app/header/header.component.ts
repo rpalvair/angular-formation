@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 @Component({
   selector: 'app-header',
@@ -8,19 +11,26 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   navbarTitle = "AgenceImmo"
-  private disabled = false;
+  connected: boolean = false
 
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
+    firebase.auth().onAuthStateChanged(
+      (user: firebase.User) => {
+        if (user) {
+          console.log("user is connected")
+          this.connected = true
+        } else {
+          console.log("user is disconnected")
+          this.connected = false
+        }
+      }
+    )
   }
 
-  isDisabled(): boolean {
-      return this.disabled;
-  }
-
-  onClick() {
-    console.log("on click");
-    this.disabled = !this.disabled;
+  logOut() {
+    console.log("logout");
+    this.authenticationService.logOut()
   }
 }
