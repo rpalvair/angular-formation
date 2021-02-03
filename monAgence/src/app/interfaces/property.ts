@@ -6,5 +6,5 @@ export interface Property {
   description: string;
   price: number;
   forSale: boolean;
-  photo?: string;
+  photos?: string[];
 }
