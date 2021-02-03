@@ -20,7 +20,7 @@ export class AdminPropertiesComponent implements OnInit {
   private editMode: boolean = false;
   private indexToUpdate: number = null;
   photoLoading: boolean = false;
-  photoUrl: any;
+  photosUrl: any[];
 
   constructor(private formBuilder: FormBuilder, private propertiesService: PropertiesService) { }
 
@@ -54,7 +54,7 @@ export class AdminPropertiesComponent implements OnInit {
     const title = this.propertiesForm.value['title']
     console.log("title", title)
     const property: Property = this.propertiesForm.value
-    property.photo = this.photoUrl ? this.photoUrl : null
+    property.photos = this.photosUrl ? this.photosUrl : []
     if (this.editMode) {
       console.log("Edit mode for property", property)
       this.propertiesService.updateProperty(property, this.indexToUpdate)
@@ -71,7 +71,7 @@ export class AdminPropertiesComponent implements OnInit {
     this.propertiesForm.reset()
     this.editMode = false
     this.indexToUpdate = null
-    this.photoUrl = null
+    this.photosUrl = []
   }
 
   onDeleteProperty(property: any) {
@@ -81,7 +81,7 @@ export class AdminPropertiesComponent implements OnInit {
   }
 
   onConfirmDelete() {
-    this.propertiesService.removeFile(this.toDelete.photo)
+    this.propertiesService.removeFiles(this.toDelete.photos)
     this.propertiesService.deleteProperty(this.toDelete)
     $('#deletePropertyModal').modal('hide')
     this.toDelete = null
@@ -94,7 +94,7 @@ export class AdminPropertiesComponent implements OnInit {
   onEditProperty(property: Property) {
     this.editMode = true;
     this.indexToUpdate = this.properties.indexOf(property);
-    this.photoUrl = property.photo
+    this.photosUrl = property.photos ? property.photos : []
     $('#propertiesFormModal').modal('show')
     this.propertiesForm.get('title').setValue(property.title)
     this.propertiesForm.get('category').setValue(property.category)
@@ -110,13 +110,15 @@ export class AdminPropertiesComponent implements OnInit {
     this.photoLoading = true
     this.propertiesService.uploadFile(event.target.files[0]).then(
       (url: string) => {
-        if (this.photoUrl && this.photoUrl != null) {
-          this.propertiesService.removeFile(this.photoUrl)
-        }
         console.log("url", url)
-        this.photoUrl = url
+        this.photosUrl.push(url)
         this.photoLoading = false
       }
     )
+  }
+
+  deletePhoto(url: string) {
+    this.propertiesService.removeFiles(new Array(url))
+    this.photosUrl.splice(this.photosUrl.indexOf(url), 1)
   }
 }

@@ -111,14 +111,16 @@ export class PropertiesService {
     )
   }
 
-  removeFile(url: string) {
-    if (url) {
-      const reference: firebase.storage.Reference = firebase.storage().refFromURL(url)
-      reference.delete().then(
-        () => console.log("file" + url + "deleted")
-      ).catch(
-        (error) => console.error(error)
-      )
+  removeFiles(url: string[]) {
+    if (url && url.length > 0) {
+      url.forEach(element => {
+        const reference: firebase.storage.Reference = firebase.storage().refFromURL(element)
+        reference.delete().then(
+          () => console.log("file" + element + "deleted")
+        ).catch(
+          (error) => console.error(error)
+        )
+      });
     }
   }
 
