@@ -1,6 +1,8 @@
-import { PropertiesService } from './../services/properties.service';
+
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Property } from '../interfaces/property';
+import { PropertiesService } from './../services/properties.service';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +24,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       .subscribe(
         (data) => {
           console.log("Data = ", data)
-          this.properties =  data
+          this.properties = data
         }
       )
     this.propertiesService.emitProperty()
@@ -36,8 +38,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     return this.forSale;
   }
 
-  getProperties(): any[] {
+  getProperties(): Property[] {
     return this.properties;
+  }
+
+
+  onViewProperty(property : Property) {
+
   }
 
   ngOnDestroy(): void {
