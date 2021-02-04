@@ -1,3 +1,4 @@
+import { AuthGuardService } from './services/auth-guard.service';
 import { ViewPropertyComponent } from './view-property/view-property.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -9,7 +10,7 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'admin/dashboard', component: AdminDashboardComponent },
+  { path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [AuthGuardService] },
   { path: 'signin', component: SigninComponent },
   { path: 'login', component: LoginComponent },
   { path: 'property/:id', component: ViewPropertyComponent },
