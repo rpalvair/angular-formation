@@ -1,7 +1,7 @@
 <div class="container">
   <h1 class="display-4">Nos biens immobiliers</h1>
   <div class="row mt-5">
-    <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let property of getProperties()">
+    <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let property of getProperties();let index = index">
       <div class="card h-100" style="width: 18rem">
         <div *ngFor="let photo of property.photos;first as isFirst">
           <img [src]="photo" *ngIf="isFirst" class="card-img-top" alt="...">
@@ -20,7 +20,7 @@
             <span *ngIf="!property.forSale">Vendu!</span>
           </p>
           <div class="text-center">
-            <button class="btn btn-primary" type="button" (click)="onViewProperty(property)">Voir ce bien</button>
+            <button class="btn btn-primary" type="button" [routerLink]="['/property',index]">Voir ce bien</button>
           </div>
         </div>
       </div>

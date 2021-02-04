@@ -10,6 +10,7 @@ import { AdminPropertiesComponent } from './admin/admin-properties/admin-propert
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SigninComponent } from './authentication/signin/signin.component';
 import { LoginComponent } from './authentication/login/login.component';
+import { ViewPropertyComponent } from './view-property/view-property.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { LoginComponent } from './authentication/login/login.component';
     AdminDashboardComponent,
     AdminPropertiesComponent,
     SigninComponent,
-    LoginComponent
+    LoginComponent,
+    ViewPropertyComponent
   ],
   imports: [
     BrowserModule,
