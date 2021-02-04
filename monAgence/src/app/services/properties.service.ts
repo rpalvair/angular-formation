@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/storage';
+import { error } from 'protractor';
 import { Subject } from 'rxjs';
 import { Property } from '../interfaces/property';
 
@@ -128,4 +129,23 @@ export class PropertiesService {
     return this.subject
   }
 
+  getProperty(index: number): Promise<any> {
+    return new Promise<any>(
+      (resolve, reject) => {
+        firebase.database().ref("/properties/" + index).once("value").then(
+          (value) => {
+            console.log("property from db", value.val())
+            resolve(value.val())
+          }
+        ).catch(
+          (error) => {
+            console.error(error)
+            reject(error)
+          }
+        )
+      }
+    )
+  }
+
 }
+

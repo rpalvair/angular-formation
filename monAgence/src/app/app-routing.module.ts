@@ -1,3 +1,4 @@
+import { ViewPropertyComponent } from './view-property/view-property.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'admin/dashboard', component: AdminDashboardComponent },
   { path: 'signin', component: SigninComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'property/:id', component: ViewPropertyComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' }
 ];

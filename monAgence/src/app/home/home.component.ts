@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -40,11 +41,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   getProperties(): Property[] {
     return this.properties;
-  }
-
-
-  onViewProperty(property : Property) {
-
   }
 
   ngOnDestroy(): void {
